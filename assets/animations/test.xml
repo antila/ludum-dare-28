@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:da3b72a2045fb88dd3403b62a60ab9bb:e03cce96bc1282c47356e74e05e83342:25a2456976bfe59cdd62c104b7067021$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+-->
+<TextureAtlas imagePath="test.png" width="2048" height="2048">
+    <sprite n="walk__000.png" x="2" y="2" w="226" h="340"/>
+    <sprite n="walk__001.png" x="230" y="2" w="226" h="340"/>
+    <sprite n="walk__002.png" x="458" y="2" w="226" h="340"/>
+    <sprite n="walk__003.png" x="686" y="2" w="226" h="340"/>
+    <sprite n="walk__004.png" x="914" y="2" w="226" h="340"/>
+    <sprite n="walk__005.png" x="1142" y="2" w="226" h="340"/>
+    <sprite n="walk__006.png" x="1370" y="2" w="226" h="340"/>
+    <sprite n="walk__007.png" x="1598" y="2" w="226" h="340"/>
+    <sprite n="walk__008.png" x="2" y="344" w="226" h="340"/>
+    <sprite n="walk__009.png" x="230" y="344" w="226" h="340"/>
+    <sprite n="walk__010.png" x="458" y="344" w="226" h="340"/>
+    <sprite n="walk__011.png" x="686" y="344" w="226" h="340"/>
+    <sprite n="walk__012.png" x="914" y="344" w="226" h="340"/>
+    <sprite n="walk__013.png" x="1142" y="344" w="226" h="340"/>
+    <sprite n="walk__014.png" x="1370" y="344" w="226" h="340"/>
+    <sprite n="walk__015.png" x="1598" y="344" w="226" h="340"/>
+    <sprite n="walk__016.png" x="2" y="686" w="226" h="340"/>
+    <sprite n="walk__017.png" x="230" y="686" w="226" h="340"/>
+    <sprite n="walk__018.png" x="458" y="686" w="226" h="340"/>
+    <sprite n="walk__019.png" x="686" y="686" w="226" h="340"/>
+    <sprite n="walk__020.png" x="914" y="686" w="226" h="340"/>
+    <sprite n="walk__021.png" x="1142" y="686" w="226" h="340"/>
+    <sprite n="walk__022.png" x="1370" y="686" w="226" h="340"/>
+    <sprite n="walk__023.png" x="1598" y="686" w="226" h="340"/>
+    <sprite n="walk__024.png" x="2" y="1028" w="226" h="340"/>
+    <sprite n="walk__025.png" x="230" y="1028" w="226" h="340"/>
+    <sprite n="walk__026.png" x="458" y="1028" w="226" h="340"/>
+    <sprite n="walk__027.png" x="686" y="1028" w="226" h="340"/>
+    <sprite n="walk__028.png" x="914" y="1028" w="226" h="340"/>
+    <sprite n="walk__029.png" x="1142" y="1028" w="226" h="340"/>
+    <sprite n="walk__030.png" x="1370" y="1028" w="226" h="340"/>
+</TextureAtlas>
