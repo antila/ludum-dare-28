@@ -2,13 +2,17 @@ var map;
 var tileset;
 var layer;
 
-var TILE_WALLS  = [201, 229];
+var TILE_WALLS  = [201, 229, 230, 231];
 var TILE_START = 2;
 var TILE_GOAL  = [203];
 var TILE_SIZE = 64;
 var TILE_HOLE = 211;
 var RED_BUTTON = 84;
 var RED_DOOR = 90;
+var GREEN_BUTTON = 104;
+var GREEN_DOOR = 110;
+var YELLOW_BUTTON = 124;
+var YELLOW_DOOR = 130;
 
 var group;
 var mapLayer;
@@ -26,6 +30,7 @@ function createMap() {
     map = game.add.tilemap(mapName);
 
     tileset = game.add.tileset('tiles');
+    decorations = game.add.tileset('decorations');
 
     // layer = game.add.tilemapLayer(0, 0, 1280, 720, tileset, map, 0);
     // layer = game.add.tilemapLayer(0, 0, 1280, 720, tileset, map, 2);
@@ -33,10 +38,11 @@ function createMap() {
     group = game.add.group();
 
     for (var i = 0; i < map.layers.length; i++) {
-        if (map.layers[i].name === 'entities') {
+         if (map.layers[i].name === 'entities') {
             mapLayer = map.layers[i];
         } else {
-            layer = game.add.tilemapLayer(0, 0, 1280, 720, tileset, map, i);
+            // game.add.tilemapLayer(0, 0, 1280, 720, decorations, map, i);
+            game.add.tilemapLayer(0, 0, 1280, 720, tileset, map, i);
         }
     }
 
@@ -54,6 +60,8 @@ function parseEntities() {
     if (typeof mouse !== 'undefined') {
         mouse.kill();
     }
+
+    resetDoors();
 
     for (var y = 0; y < mapLayer.data.length; y++) {
         for (var x = 0; x < mapLayer.data[y].length; x++) {
@@ -75,7 +83,6 @@ function parseEntities() {
 
                     default:
                         addOtherItem(tile, x, y);
-                        //console.log('tile', tile, "doesn't exist.");
                 }
             }
         };
@@ -94,14 +101,18 @@ function addOtherItem(tile, x, y) {
     itemLookup[221] = 'key';
     itemLookup[222] = 'pill';
     itemLookup[223] = 'pipette';
-    itemLookup[223] = 'pipetteset';
+    itemLookup[224] = 'pipetteset';
 
     var tileLookup = [];
     tileLookup[225] = RED_BUTTON; //red_button;
     tileLookup[229] = RED_DOOR; //red_button;
+    tileLookup[226] = GREEN_BUTTON; //red_button;
+    tileLookup[230] = GREEN_DOOR; //red_button;
+    tileLookup[227] = YELLOW_BUTTON; //red_button;
+    tileLookup[231] = YELLOW_DOOR; //red_button;
 
-    if (tileLookup[tile] !== 'undefined') {
-        console.log(tileLookup[tile]);
+    if (typeof tileLookup[tile] !== 'undefined') {
+
         var c = group.create((x * TILE_SIZE), y * TILE_SIZE, 'tiles-sprites', tileLookup[tile]);
         c.name = tileLookup[tile];
         // c.body.immovable = true;
@@ -134,9 +145,9 @@ function addWall(tile, x, y) {
 }
 
 function addPlayer(tile, x, y) {
-    // c.body.immovable = true;
-    scientist = group.add(game.add.sprite(x * TILE_SIZE + (TILE_SIZE/2), y * TILE_SIZE + (TILE_SIZE/2), 'scientist'));
-    scientist.anchor.setTo(0.5, 0.9);
+
+    // scientist = group.add(game.add.sprite(x * TILE_SIZE + (TILE_SIZE/2), y * TILE_SIZE + (TILE_SIZE/2), 'scientist'));
+    // scientist.anchor.setTo(0.5, 0.9);
 
     mouse = group.add(game.add.sprite(x * TILE_SIZE + (TILE_SIZE/2), y * TILE_SIZE + (TILE_SIZE/2), 'monkey'));
     mouse.anchor.setTo(0.5, 0.9);

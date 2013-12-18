@@ -36,7 +36,7 @@ function onTileClick(item) {
     }
 
     if (orders.length >= 32) {
-        return;
+        //return;
     }
 
     var icon = (item.spriteNumber * 5) + 2;
@@ -78,16 +78,25 @@ function renderOrders() {
         }
 
         order.y = 580;
-        order.x = 25 + (i * 60);
-        if (i > 15) {
+        order.x = 25 + (i * 40);
+        if (i > 22) {
             order.y += 50;
-            order.x -= (16 * 60);
+            order.x -= (23 * 40);
         }
+        if (i > 44) {
+            order.y += 50;
+            order.x -= (45 * 40);
+        }
+
         order.index = i;
     };
 }
 
 function stopButton() {
+    resetDoors(90, 229, 900);
+    resetDoors(110, 230, 1100);
+    resetDoors(130, 231, 1300);
+
     isPlaying = false;
     // mouseTween.stop();
 
@@ -206,10 +215,38 @@ function moveMouse(direction) {
     if (direction === 'DOWN') {
         position.y += TILE_SIZE
     }
-
+    var targetTile;
     var tileX = Math.floor(position.x/TILE_SIZE);
     var tileY = Math.floor(position.y/TILE_SIZE);
-    var targetTile = mapLayer.data[tileY][tileX];
+    for (var i = 0; i < map.layers.length; i++) {
+        if (map.layers[i].name === 'entities') {
+            targetTile = map.getTile(tileX, tileY, i);//mapLayer.data[tileY][tileX];
+        }
+
+        if (map.getTile(tileX, tileY, i) === 6) {
+            targetTile = TILE_HOLE;
+        }
+    }
+
+
+
+
+    if (targetTile === TILE_HOLE) {
+        game.add.tween(mouse).to({ angle: -125 }, 1500, Phaser.Easing.Out, true, 0, false);
+        game.add.tween(mouse.scale).to({ x: 0, y: 0, angle: 125 }, 1500, Phaser.Easing.In, true, 0, false);
+        // cancelAllOrders();
+        runNext = false;
+    }
+
+    if (targetTile === 225) {
+        toggleDoor(90, 229, 900);
+    }
+    if (targetTile === 226) {
+        toggleDoor(110, 230, 1100);
+    }
+    if (targetTile === 227) {
+        toggleDoor(130, 231, 1300);
+    }
 
     // Collision with wall
     if (TILE_WALLS.indexOf(targetTile) !== -1) {
@@ -229,32 +266,6 @@ function moveMouse(direction) {
         return;
     }
 
-    if (targetTile === TILE_HOLE) {
-        game.add.tween(mouse).to({ angle: -125 }, 1500, Phaser.Easing.Out, true, 0, false);
-        game.add.tween(mouse.scale).to({ x: 0, y: 0, angle: 125 }, 1500, Phaser.Easing.In, true, 0, false);
-        // cancelAllOrders();
-        runNext = false;
-    }
-console.log('tt', targetTile);
-    if (targetTile === 225) {
-        console.warn('red button');
-
-        group.forEach(function(item) {
-            console.log('item', item.name);
-
-            if (item.name === 90) {
-                console.log('bingo');
-                item.kill();
-
-                // var c = group.create((item.x * TILE_SIZE), item.y * TILE_SIZE, 'tiles-sprites', 89);
-                // c.name = 89;
-                // c.body.immovable = true;
-            }
-        }, this);
-
-        map.swap(225, 10);
-    }
-
     mouseTween = game.add.tween(mouse).to(
         { x: position.x,
           y: position.y
@@ -271,6 +282,14 @@ console.log('tt', targetTile);
             return;
         } else {
             // Remain calm and keep playing
+
+            // Stop tile
+            if (targetTile === 212) {
+                // runNext = false
+                executeOrder();
+                return;
+            }
+
             if (runNext) {
                 moveMouse(direction);
             }
@@ -296,11 +315,66 @@ function victoryAnimation() {
     game.add.tween(mouse)
         .delay(500)
         .onCompleteCallback(function() {
-            goToLevelSecletor();
+            // goToLevelSecletor();
+
+            if (mapName === 'level8') {
+                this.game.state.start('ending', true, false);
+            } else {
+                goToLevelSecletor();
+            }
         }).start();
 
 }
 
 function goToLevelSecletor() {
     this.game.state.start('levelselector', true, false);
+}
+
+function resetDoors(door, floor, open) {
+    group.forEach(function(item) {
+        if (item.name === open) {
+            var tileX = Math.floor(item.x / TILE_SIZE);
+            var tileY = Math.floor(item.y / TILE_SIZE);
+
+            for (var i = 0; i < map.layers.length; i++) {
+                if (map.layers[i].name === 'entities') {
+                    map.putTile(floor, tileX, tileY, i);
+                    item.revive();
+                    // item.texture.setFrame(90);
+                    item.name = door;
+                }
+            }
+        }
+
+    }, this);
+}
+
+// door=90, floor=229, open=900
+
+function toggleDoor(door, floor, open) {
+    group.forEach(function(item) {
+        var tileX = Math.floor(item.x/TILE_SIZE);
+        var tileY = Math.floor(item.y/TILE_SIZE);
+
+        if (item.name === door) {
+            for (var i = 0; i < map.layers.length; i++) {
+                if (map.layers[i].name === 'entities') {
+                    map.putTile(open, tileX, tileY, i);
+                }
+            }
+
+            item.name = open;
+            item.kill();
+        } else if (item.name === open) {
+            for (var i = 0; i < map.layers.length; i++) {
+                if (map.layers[i].name === 'entities') {
+                    map.putTile(floor, tileX, tileY, i);
+                }
+            }
+
+            item.name = door;
+            item.revive();
+        }
+    }, this);
+
 }

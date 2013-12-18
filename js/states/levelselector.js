@@ -12,25 +12,18 @@ MouseGame.LevelSelector.prototype = {
     ],
 
     preload: function() {
-        // game.load.image('levelselector-background','assets/backgrounds/levelselector-background.jpg');
-        game.load.image('mainmenu-background','assets/backgrounds/background.jpg');
+        // game.load.image('mainmenu-background','assets/backgrounds/background.jpg');
 
-        game.load.bitmapFont('DejaVu', 'assets/fonts/dv.png', 'assets/fonts/dv.xml');
+        // game.load.bitmapFont('DejaVu', 'assets/fonts/dv.png', 'assets/fonts/dv.xml');
 
-        // Buttons
-        game.load.image('button-back','assets/buttons/back.png');
-        game.load.image('button-check','assets/buttons/check.png');
-        game.load.image('button','assets/buttons/background.png');
+        // // Buttons
+        // game.load.image('button-back','assets/buttons/back.png');
+        // game.load.image('button-check','assets/buttons/check.png');
+        // game.load.image('button','assets/buttons/background.png');
 
-        // for (var i = 0; i < this.levels.length; i++) {
-        //     var level = this.levels[i];
-        //     game.load.tilemap(level, 'assets/maps/' + level + '.json', null, Phaser.Tilemap.TILED_JSON);
-
+        // for (var i = 1; i <= 15; i++) {
+        //     game.load.image('button-level' + i,'assets/buttons/level' + i + '.png');
         // }
-
-        for (var i = 1; i <= 15; i++) {
-            game.load.image('button-level' + i,'assets/buttons/level' + i + '.png');
-        }
     },
 
     create: function () {
@@ -55,13 +48,13 @@ MouseGame.LevelSelector.prototype = {
         var posY = 80;
         var posX = 80;
 
-        for (var i = 1; i <= 15; i++) {
+        for (var i = 1; i <= 8; i++) {
 
-            if ((i-1) % 5 === 0) {
+            if ((i-1) % 4 === 0) {
                 posY += 100;
                 //posX = 80;
             }
-            var posX = 250 + ((i-1) % 5) * 200;
+            var posX = 250 + ((i-1) % 4) * 270;
 
 
             var levelButton = ui.add(this.game.add.button(posX, posY, 'button-level' + i, this.startGame, this, 2, 1, 0));
@@ -74,7 +67,7 @@ MouseGame.LevelSelector.prototype = {
             }
         }
 
-        history.pushState(null, null, '#levelselector');
+        //history.pushState(null, null, '#levelselector');
     },
 
     startGame: function (button) {

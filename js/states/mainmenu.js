@@ -5,23 +5,23 @@ MouseGame.MainMenu = function (game) {
 
 MouseGame.MainMenu.prototype = {
     preload: function() {
-        game.load.image('mainmenu-background','assets/backgrounds/background.jpg');
+        // game.load.image('mainmenu-background','assets/backgrounds/background.jpg');
 
-        game.load.image('background','assets/backgrounds/placeholder.png');
-        game.load.image('logo','assets/buttons/menu_title.png');
+        // game.load.image('background','assets/backgrounds/placeholder.png');
+        // game.load.image('logo','assets/buttons/menu_title.png');
 
-        game.load.spritesheet('item', 'assets/buttons/actions.png', 96, 96);
+        // game.load.spritesheet('item', 'assets/buttons/actions.png', 96, 96);
 
-        game.load.tilemap('level', 'assets/maps/test-map.json', null, Phaser.Tilemap.TILED_JSON);
-        game.load.tileset('tiles', 'assets/tiles/game-tiles.png', 64, 64);
-        game.load.spritesheet('tile-logic', 'assets/tiles/tile-logic.png', 64, 64);
+        // game.load.tilemap('level', 'assets/maps/test-map.json', null, Phaser.Tilemap.TILED_JSON);
+        // game.load.tileset('tiles', 'assets/tiles/game-tiles.png', 64, 64);
+        // game.load.spritesheet('tile-logic', 'assets/tiles/tile-logic.png', 64, 64);
 
-        game.load.audio('menu-music', ['assets/music/game.mp3', 'assets/music/game.ogg']);
-        game.load.audio('game-music', ['assets/music/nowyouwilldie.mp3', 'assets/music/nowyouwilldie.ogg']);
+        // game.load.audio('menu-music', ['assets/music/game.mp3', 'assets/music/game.ogg']);
+        // game.load.audio('game-music', ['assets/music/nowyouwilldie.mp3', 'assets/music/nowyouwilldie.ogg']);
 
-        // Buttons
-        game.load.image('button-play','assets/buttons/play.png');
-        game.load.image('button-credits','assets/buttons/credits.png');
+        // // Buttons
+        // game.load.image('button-play','assets/buttons/play.png');
+        // game.load.image('button-credits','assets/buttons/credits.png');
     },
 
     create: function () {
@@ -39,7 +39,7 @@ MouseGame.MainMenu.prototype = {
 
         var credits = this.game.add.button(this.game.world.centerX, 620, 'button-credits', this.showCredits, this, 2, 1, 0);
         credits.anchor.setTo(0.5, 0.5);
-        history.pushState(null, null, '#mainmenu');
+        //history.pushState(null, null, '#mainmenu');
 
         playMusic(true);
     },
@@ -71,12 +71,12 @@ function playMusic(isMenuMusic) {
         }
 
         // game.add.tween(gameMusic)
-        //     .to({ volume: 0 }, 2500, Phaser.Easing.Back.In, true, 0, false)
+        //     .to({ volume: 0 }, 2500, Phaser.Easing.In, true, 0, false)
         //     .onCompleteCallback(function() {
                 gameMusic.pause();
-                menuMusic.play();
+                menuMusic.play('',0,1,true);
 
-            //     game.add.tween(menuMusic).to({ volume: 1 }, 2500, Phaser.Easing.Back.In, true, 0, false).start();
+            //     game.add.tween(menuMusic).to({ volume: 1 }, 2500, Phaser.Easing.In, true, 0, false).start();
             // }).start();
     } else {
         if (gameMusic.isPlaying === true) {
@@ -84,12 +84,12 @@ function playMusic(isMenuMusic) {
         }
 
         // game.add.tween(menuMusic)
-        //     .to({ volume: 0 }, 2500, Phaser.Easing.Back.In, true, 0, false)
+        //     .to({ volume: 0 }, 2500, Phaser.Easing.In, true, 0, false)
         //     .onCompleteCallback(function() {
                 menuMusic.pause();
-                gameMusic.play();
+                gameMusic.play('',0,1,true);
 
-            //     game.add.tween(gameMusic).to({ volume: 1 }, 2500, Phaser.Easing.Back.In, true, 0, false).start();
+            //     game.add.tween(gameMusic).to({ volume: 1 }, 2500, Phaser.Easing.In, true, 0, false).start();
             // }).start();
     }
 }

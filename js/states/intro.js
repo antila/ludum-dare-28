@@ -11,18 +11,18 @@ var introScreens = [];
 
 MouseGame.Intro.prototype = {
     preload: function() {
-        game.load.image('title','assets/backgrounds/title.jpg');
-        game.load.image('intro-1','assets/backgrounds/intro-1.jpg');
-        game.load.image('intro-2','assets/backgrounds/intro-2.jpg');
-        game.load.image('intro-3','assets/backgrounds/intro-3.jpg');
-        game.load.image('intro-4','assets/backgrounds/intro-4.jpg');
-        game.load.image('intro-5','assets/backgrounds/intro-5.jpg');
-        game.load.image('intro-6','assets/backgrounds/intro-6.jpg');
-        game.load.image('intro-7','assets/backgrounds/intro-7.jpg');
-        game.load.image('intro-8','assets/backgrounds/intro-8.jpg');
-        game.load.image('intro-9','assets/backgrounds/intro-9.jpg');
-        game.load.image('intro-10','assets/backgrounds/intro-10.jpg');
-        game.load.audio('menu-music', ['assets/music/game.mp3', 'assets/music/game.ogg']);
+        // game.load.image('title','assets/backgrounds/title.jpg');
+        // game.load.image('intro-1','assets/backgrounds/intro-1.jpg');
+        // game.load.image('intro-2','assets/backgrounds/intro-2.jpg');
+        // game.load.image('intro-3','assets/backgrounds/intro-3.jpg');
+        // game.load.image('intro-4','assets/backgrounds/intro-4.jpg');
+        // game.load.image('intro-5','assets/backgrounds/intro-5.jpg');
+        // game.load.image('intro-6','assets/backgrounds/intro-6.jpg');
+        // game.load.image('intro-7','assets/backgrounds/intro-7.jpg');
+        // game.load.image('intro-8','assets/backgrounds/intro-8.jpg');
+        // game.load.image('intro-9','assets/backgrounds/intro-9.jpg');
+        // game.load.image('intro-10','assets/backgrounds/intro-10.jpg');
+        // game.load.audio('menu-music', ['assets/music/game.mp3', 'assets/music/game.ogg']);
     },
 
     create: function () {
