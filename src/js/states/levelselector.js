@@ -7,11 +7,6 @@ MouseGame.LevelSelector = function (game) {
 
 MouseGame.LevelSelector.prototype = {
     level: null,
-    levels: [
-        'test-map',
-        'test-scroll',
-        'level1'
-    ],
 
     create: function () {
         "use strict";
