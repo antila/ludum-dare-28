@@ -7,6 +7,7 @@ MouseGame.Commands.prototype = {
     mouseTween: null,
     isPlaying: false,
     goButton: null,
+    buttons: [],
 
     createButtons: function() {
         "use strict";
@@ -18,7 +19,7 @@ MouseGame.Commands.prototype = {
 
         this.goButton = MouseGame.Game.ui.add(game.add.button(1050, 600, 'item', this.playLevel, this, 20, 21, 22));
 
-        var resetButton = game.add.button(1160, 600, 'item', this.resetLevel, this, 25, 26, 27);
+        this.resetButton = game.add.button(1160, 600, 'item', this.resetLevel, this, 25, 26, 27);
     },
 
     createButton: function(callback, position) {
@@ -37,6 +38,8 @@ MouseGame.Commands.prototype = {
 
         item = MouseGame.Game.ui.add((game.add.button(posX, posY, 'item', callback, this, icon, iconOver, iconDown)));
         item.spriteNumber = position;
+
+        this.buttons.push(item);
     },
 
     onTileClick: function(item) {
@@ -281,11 +284,11 @@ MouseGame.Commands.prototype = {
         // Collision with wall
         if (MouseGame.MapLoader.prototype.TILE_WALLS.indexOf(targetTile) !== -1) {
             game.add.tween(MouseGame.Game.prototype.mouse.scale).to(
-                { x: 1.1, y: 1.1 }, 150,
+                { x: 1, y: 1 }, 150,
                 Phaser.Easing.Back.In,
                 true, 0, false
             ).to(
-                { x: 1, y: 1 }, 150,
+                { x: 0.8, y: 0.8 }, 150,
                 Phaser.Easing.Back.Out,
                 true, 0, false
             );

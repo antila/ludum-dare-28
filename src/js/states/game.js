@@ -7,12 +7,12 @@ MouseGame.Game.prototype = {
     img: null,
     width: document.body.clientWidth,
     height: document.body.clientHeight,
+    keyReset: false,
 
     background: null,
 
     scientist: null,
     mouse: null,
-
     ui: null,
 
     levels: [
@@ -53,18 +53,56 @@ MouseGame.Game.prototype = {
     update: function() {
         "use strict";
 
-        // var x, y, cx, cy, dx, dy, angle, scale;
-
-        // x = game.input.position.x;
-        // y = game.input.position.y;
-        // cx = game.world.centerX;
-        // cy = game.world.centerY;
         if (game.input.keyboard.isDown(Phaser.Keyboard.ESC)) {
             this.quitToMenu();
         }
 
-        // ui.x = game.camera.x;
-        // ui.y = game.camera.y;
+        // if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.keyReset === false) {
+        //     this.keyReset = true;
+        //     var button0 = MouseGame.Commands.prototype.buttons[0];
+        //     MouseGame.Commands.prototype.onTileClick(button0);
+        // }
+
+        // if (game.input.keyboard.justPressed(Phaser.Keyboard.RIGHT) && this.keyReset === false) {
+        //     this.keyReset = true;
+        //     var button1 = MouseGame.Commands.prototype.buttons[1];
+        //     MouseGame.Commands.prototype.onTileClick(button1);
+        // }
+
+        // if (game.input.keyboard.justPressed(Phaser.Keyboard.LEFT) && this.keyReset === false) {
+        //     this.keyReset = true;
+        //     var button2 = MouseGame.Commands.prototype.buttons[2];
+        //     MouseGame.Commands.prototype.onTileClick(button2);
+        // }
+
+        // if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN) && this.keyReset === false) {
+        //     this.keyReset = true;
+        //     var button3 = MouseGame.Commands.prototype.buttons[3];
+        //     MouseGame.Commands.prototype.onTileClick(button3);
+        // }
+
+        // if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) && this.keyReset === false) {
+        //     this.keyReset = true;
+        //     MouseGame.Commands.prototype.playLevel();
+        // }
+
+        // if (game.input.keyboard.justPressed(Phaser.Keyboard.DELETE) && this.keyReset === false) {
+        //     this.keyReset = true;
+        //     var lastIndex = MouseGame.Commands.prototype.orders.length;
+        //     var button = MouseGame.Commands.prototype.orders[lastIndex-1];
+        //     if (typeof button !== 'undefined') {
+        //         MouseGame.Commands.prototype.onOrderClick(button);
+        //     }
+        // }
+
+        // if (game.input.keyboard.justReleased(Phaser.Keyboard.LEFT) ||
+        //     game.input.keyboard.justReleased(Phaser.Keyboard.RIGHT) ||
+        //     game.input.keyboard.justReleased(Phaser.Keyboard.UP) ||
+        //     game.input.keyboard.justReleased(Phaser.Keyboard.DOWN) ||
+        //     game.input.keyboard.justReleased(Phaser.Keyboard.ENTER) ||
+        //     game.input.keyboard.justReleased(Phaser.Keyboard.DELETE)) {
+        //     this.keyReset = false;
+        // }
     },
 
     quitToMenu: function () {
