@@ -290,11 +290,7 @@ MouseGame.Commands.prototype = {
                 true, 0, false
             );
 
-            // game.add.tween(MouseGame.Game.prototype.mouse)
-            //     .onCompleteCallback(function() {
-            //         console.log('tween');
-                    this.executeOrder();
-            // }).start();
+            this.executeOrder();
 
             return;
         }
