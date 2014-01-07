@@ -37,6 +37,8 @@ MouseGame.MapLoader.prototype = {
 
         MouseGame.Game.prototype.mouse = this.group.add(game.add.sprite(x * this.TILE_SIZE + (this.TILE_SIZE/2), y * this.TILE_SIZE + (this.TILE_SIZE/2), 'monkey'));
         MouseGame.Game.prototype.mouse.anchor.setTo(0.5, 0.9);
+        MouseGame.Game.prototype.mouse.scale = {x: 0.8, y: 0.8};
+
         // mouse.events.onOutOfBounds.add(alienOut, this);
 
         //mouse.fixedToCamera = true;
