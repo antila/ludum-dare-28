@@ -1,4 +1,6 @@
 MouseGame.LevelSelector = function (game) {
+    "use strict";
+
     //  Our main menu
     this.game = game;
 };
@@ -11,24 +13,11 @@ MouseGame.LevelSelector.prototype = {
         'level1'
     ],
 
-    preload: function() {
-        // game.load.image('mainmenu-background','assets/backgrounds/background.jpg');
-
-        // game.load.bitmapFont('DejaVu', 'assets/fonts/dv.png', 'assets/fonts/dv.xml');
-
-        // // Buttons
-        // game.load.image('button-back','assets/buttons/back.png');
-        // game.load.image('button-check','assets/buttons/check.png');
-        // game.load.image('button','assets/buttons/background.png');
-
-        // for (var i = 1; i <= 15; i++) {
-        //     game.load.image('button-level' + i,'assets/buttons/level' + i + '.png');
-        // }
-    },
-
     create: function () {
+        "use strict";
+
         var bg = this.game.add.sprite(0, 0, 'mainmenu-background');
-        ui = game.add.group();
+        var ui = game.add.group();
 
         var backButton = ui.add(this.game.add.button(1050, 600, 'button-back', this.showMenu, this, 2, 1, 0));
         backButton.anchor.setTo(0.5, 0.5);
@@ -54,8 +43,7 @@ MouseGame.LevelSelector.prototype = {
                 posY += 100;
                 //posX = 80;
             }
-            var posX = 250 + ((i-1) % 4) * 270;
-
+            posX = 250 + ((i-1) % 4) * 270;
 
             var levelButton = ui.add(this.game.add.button(posX, posY, 'button-level' + i, this.startGame, this, 2, 1, 0));
             levelButton.anchor.setTo(0.5, 0.5);
@@ -71,17 +59,23 @@ MouseGame.LevelSelector.prototype = {
     },
 
     startGame: function (button) {
+        "use strict";
+
         this.level = button.level;
         this.game.state.states.levelselector.level = button.level;
         this.game.state.start('game');
     },
 
     showMenu: function () {
+        "use strict";
+
         this.game.state.start('mainmenu');
     },
-}
+};
 
 function clearSaves() {
+    "use strict";
+
     for (var i = 1; i <= 15; i++) {
         localStorage["level-level" + 1] = null;
     }

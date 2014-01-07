@@ -1,4 +1,5 @@
 MouseGame.Preloader = function (game) {
+    "use strict";
 
     this.game = game;
 
@@ -12,10 +13,12 @@ MouseGame.Preloader = function (game) {
 MouseGame.Preloader.prototype = {
 
     preload: function () {
+        "use strict";
+
         game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
         game.stage.scale.setShowAll();
         window.addEventListener('resize', function () {
-          game.stage.scale.refresh();
+            game.stage.scale.refresh();
         });
         game.stage.scale.refresh();
 
@@ -26,25 +29,10 @@ MouseGame.Preloader.prototype = {
 
         this.load.setPreloadSprite(this.preloadBar);
 
-        // for (var i = 0; i < this.levels.length; i++) {
-        //     var level = this.levels[i];
-        //     game.load.tilemap(level, 'assets/maps/' + level + '.json', null, Phaser.Tilemap.TILED_JSON);
-        // }
-
         for (var i = 1; i <= 8; i++) {
             game.load.image('button-level' + i,'assets/buttons/level' + i + '.png');
             game.load.tilemap('level'+i, 'assets/maps/level' + i + '.json', null, Phaser.Tilemap.TILED_JSON);
         }
-
-        // game.load.tilemap('level1', 'assets/maps/level1.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.tilemap('level12', 'assets/maps/level12.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.tilemap('level13', 'assets/maps/level13.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.tilemap('level14', 'assets/maps/level14.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.tilemap('level15', 'assets/maps/level15.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.tilemap('test-map', 'assets/maps/test-map.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.tilemap('level-doors-medium', 'assets/maps/level-doors-medium.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.tilemap('level-navigate-easy', 'assets/maps/level-navigate-easy.json', null, Phaser.Tilemap.TILED_JSON);
-        // game.load.tilemap('level-doors-hard', 'assets/maps/level-doors-hard.json', null, Phaser.Tilemap.TILED_JSON);
 
         // Load everything!!
         game.load.audio('game-music', ['assets/music/nowyouwilldie.mp3', 'assets/music/nowyouwilldie.ogg']);
@@ -93,47 +81,48 @@ MouseGame.Preloader.prototype = {
     },
 
     create: function () {
-        this.preloadBar.cropEnabled = false;
+        "use strict";
 
-        //var bg = this.game.add.sprite(0, 0, 'preloader-background');
+        this.preloadBar.cropEnabled = false;
 
         game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
         game.stage.scale.setShowAll();
         window.addEventListener('resize', function () {
-          game.stage.scale.refresh();
+            game.stage.scale.refresh();
         });
         game.stage.scale.refresh();
 
-        // switch (window.location.hash){
-        //     case '#mainmenu':
-        //         this.game.state.start('mainmenu');
-        //         break;
-        //     case '#credits':
-        //         this.game.state.start('credits');
-        //         break;
-        //     case '#levelselector':
-        //         this.game.state.start('levelselector');
-        //         break;
-        //     case '#game':
-        //         var level = window.location.pathname;
+        switch (window.location.hash){
+            case '#mainmenu':
+                this.game.state.start('mainmenu');
+                break;
+            case '#credits':
+                this.game.state.start('credits');
+                break;
+            case '#levelselector':
+                this.game.state.start('levelselector');
+                break;
+            case '#game':
+                var level = window.location.pathname;
 
-        //         this.game.state.states.levelselector.level = level.replace('/', '');
-        //         this.game.state.start('game');
-        //         break;
+                this.game.state.states.levelselector.level = level.replace('/', '');
+                this.game.state.start('game');
+                break;
 
-        //     default:
-        //         this.game.state.start('intro');
-        // }
+            default:
+                this.game.state.start('intro');
+        }
         this.game.state.start('intro');
 
     },
 
     update: function () {
-        if (this.cache.isSoundDecoded('menu-music') && this.ready == false)
-        {
-                this.ready = true;
-                this.game.state.start('intro');
+        "use strict";
+
+        if (this.cache.isSoundDecoded('menu-music') && this.ready === false) {
+            this.ready = true;
+            this.game.state.start('intro');
         }
     }
 
-}
+};

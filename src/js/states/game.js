@@ -1,22 +1,20 @@
-MouseGame.Game = function (game) {
-
-    this.game = game;
-
-    var game;
-    var img;
-    var width = document.body.clientWidth;
-    var height = document.body.clientHeight;
-
-    var background;
-
-    var scientist;
-    var mouse;
-
-    var ui;
+MouseGame.Game = function () {
+    "use strict";
 };
 
 
 MouseGame.Game.prototype = {
+    img: null,
+    width: document.body.clientWidth,
+    height: document.body.clientHeight,
+
+    background: null,
+
+    scientist: null,
+    mouse: null,
+
+    ui: null,
+
     levels: [
         'test-map',
         'test-scroll',
@@ -26,59 +24,35 @@ MouseGame.Game.prototype = {
     ],
 
     preload: function () {
+        "use strict";
+
         var activeLevel = this.game.state.states.levelselector.level;
-        // game.load.tilemap(activeLevel, 'assets/maps/' + activeLevel + '.json', null, Phaser.Tilemap.TILED_JSON);
-
-        // game.load.image('mainmenu-background','assets/backgrounds/background.jpg');
-
-        // game.load.image('background','assets/backgrounds/placeholder.png');
-
-        // game.load.spritesheet('item', 'assets/buttons/actions.png', 96, 96);
-        // game.load.spritesheet('orders', 'assets/buttons/sequence.png', 96, 96);
 
         game.load.tileset('tiles', 'assets/tiles/new-tiles.png', 64, 64);
         game.load.spritesheet('tiles-sprites', 'assets/tiles/new-tiles.png', 64, 64);
-        // game.load.spritesheet('tile-logic', 'assets/tiles/tile-logic.png', 64, 64);
-
-        // game.load.audio('game-music', ['assets/music/nowyouwilldie.mp3', 'assets/music/nowyouwilldie.ogg']);
-
-        // for (var i = 0; i < this.levels.length; i++) {
-        //     var level = this.levels[i];
-        //     game.load.tilemap(level, 'assets/maps/' + level + '.json', null, Phaser.Tilemap.TILED_JSON);
-        // };
-
-        // // Entities
-        // game.load.image('scientist',    'assets/entities/scientist.png');
-        // game.load.image('monkey',       'assets/entities/monkey.png');
-        // game.load.image('bottle_blue',  'assets/entities/bottle_blue.png');
-        // game.load.image('bottle_green', 'assets/entities/bottle_green.png');
-        // game.load.image('bottle_orange','assets/entities/bottle_orange.png');
-        // game.load.image('bottle_red',   'assets/entities/bottle_red.png');
-        // game.load.image('bottle_yellow','assets/entities/bottle_yellow.png');
-        // game.load.image('key',          'assets/entities/key.png');
-        // game.load.image('pill',         'assets/entities/pill.png');
-        // game.load.image('pipette',      'assets/entities/pipette.png');
-        // game.load.image('pipetteset',   'assets/entities/pipetteset.png');
-
     },
 
     create: function () {
-        createMap();
+        "use strict";
 
-        ui = game.add.group();
+        MouseGame.MapLoader.prototype.createMap();
 
-        background = ui.add(game.add.sprite(0, 0, 'background'));
-        createButtons();
+        MouseGame.Game.ui = game.add.group();
+
+        var background = MouseGame.Game.ui.add(game.add.sprite(0, 0, 'background'));
+        MouseGame.Commands.prototype.createButtons();
 
         var level = this.game.state.states.levelselector.level;
-        //history.replaceState(level, 'hey', level+'#game');
+        // history.replaceState(level, 'hey', level+'#game');
 
         playMusic(false);
 
-        isPlaying = false;
+        MouseGame.Commands.isPlaying = false;
     },
 
     update: function() {
+        "use strict";
+
         // var x, y, cx, cy, dx, dy, angle, scale;
 
         // x = game.input.position.x;
@@ -94,8 +68,10 @@ MouseGame.Game.prototype = {
     },
 
     quitToMenu: function () {
+        "use strict";
+
         this.game.state.start('levelselector');
     }
 
-}
+};
 

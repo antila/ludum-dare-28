@@ -1,18 +1,19 @@
-MouseGame.Boot = function (game) {
+MouseGame.Boot = function () {
 
 };
 
 MouseGame.Boot.prototype = {
 
     preload: function () {
+        "use strict";
+
         this.load.image('preloaderBar', 'assets/preloader.png');
         this.load.image('preloaderBarBg', 'assets/preloader-bg.png');
         game.load.image('preloader-background','assets/backgrounds/preloader.jpg');
-
-
     },
 
     create: function () {
+        "use strict";
 
         //  Unless you specifically know your game needs to support multi-touch I would recommend setting this to 1
         this.game.input.maxPointers = 1;
@@ -20,7 +21,7 @@ MouseGame.Boot.prototype = {
         game.stage.scaleMode = Phaser.StageScaleMode.SHOW_ALL;
         game.stage.scale.setShowAll();
         window.addEventListener('resize', function () {
-          game.stage.scale.refresh();
+            game.stage.scale.refresh();
         });
         game.stage.scale.refresh();
 
