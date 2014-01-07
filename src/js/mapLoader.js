@@ -32,32 +32,9 @@ MouseGame.MapLoader.prototype = {
     addPlayer: function(tile, x, y) {
         "use strict";
 
-        // scientist = group.add(game.add.sprite(x * TILE_SIZE + (TILE_SIZE/2), y * TILE_SIZE + (TILE_SIZE/2), 'scientist'));
-        // scientist.anchor.setTo(0.5, 0.9);
-
         MouseGame.Game.prototype.mouse = this.group.add(game.add.sprite(x * this.TILE_SIZE + (this.TILE_SIZE/2), y * this.TILE_SIZE + (this.TILE_SIZE/2), 'monkey'));
         MouseGame.Game.prototype.mouse.anchor.setTo(0.5, 0.9);
         MouseGame.Game.prototype.mouse.scale = {x: 0.8, y: 0.8};
-
-        // mouse.events.onOutOfBounds.add(alienOut, this);
-
-        //mouse.fixedToCamera = true;
-        //mouse.cameraOffset.x = 300;
-        //mouse.cameraOffset.y = 300;
-
-        // game.camera.follow(mouse, Phaser.Camera.FOLLOW_TOPDOWN);
-        // game.world.setBounds(0, 0, TILE_SIZE * mapLayer.data.length, TILE_SIZE * mapLayer.data[0].length);
-
-
-        // jellyfish = game.add.sprite(x * TILE_SIZE + (TILE_SIZE/2), y * TILE_SIZE + (TILE_SIZE/2), 'mummy');
-
-        //  In the texture atlas the jellyfish uses the frame names blueJellyfish0000 to blueJellyfish0032
-        //  So we can use the handy generateFrameNames to create this for us.
-        //jellyfish.animations.add('swim', Phaser.Animation.generateFrameNames('walk__', 0, 30, '', 4), 30, true);
-        //jellyfish.animations.play('swim');
-        // jellyfish.animations.play('walk', 30, true);
-
-        //walk__000.png
     },
 
     addGoal: function(tile, x, y) {
