@@ -26,6 +26,7 @@ MouseGame.Credits.prototype = {
 
         var button = this.game.add.button(this.game.world.centerX, 630, 'button-back', this.showMenu, this, 2, 1, 0);
         button.anchor.setTo(0.5, 0.5);
+        MouseGame.MainMenu.prototype.bindButtonHover(button);
         //history.pushState(null, null, '#credits');
     },
 

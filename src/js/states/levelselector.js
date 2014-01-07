@@ -16,7 +16,7 @@ MouseGame.LevelSelector.prototype = {
 
         var backButton = ui.add(this.game.add.button(1050, 600, 'button-back', this.showMenu, this, 2, 1, 0));
         backButton.anchor.setTo(0.5, 0.5);
-
+        MouseGame.MainMenu.prototype.bindButtonHover(backButton);
         // var levels = this.game.state.states.game.levels;
 
         // for (var i = 0; i < this.levels.length; i++) {
@@ -43,6 +43,7 @@ MouseGame.LevelSelector.prototype = {
             var levelButton = ui.add(this.game.add.button(posX, posY, 'button-level' + i, this.startGame, this, 2, 1, 0));
             levelButton.anchor.setTo(0.5, 0.5);
             levelButton.level = 'level' + i;
+            MouseGame.MainMenu.prototype.bindButtonHover(levelButton);
 
             if (localStorage["level-" + levelButton.level] === 'true') {
                 var check = this.game.add.sprite(posX + 15, posY - 50, 'button-check');

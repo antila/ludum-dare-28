@@ -59,12 +59,48 @@ MouseGame.MainMenu.prototype = {
 
         var button = this.game.add.button(this.game.world.centerX, 500, 'button-play', this.startGame, this, 2, 1, 0);
         button.anchor.setTo(0.5, 0.5);
+        button.setInteractive(true);
+        this.bindButtonHover(button);
 
         var credits = this.game.add.button(this.game.world.centerX, 620, 'button-credits', this.showCredits, this, 2, 1, 0);
         credits.anchor.setTo(0.5, 0.5);
+        this.bindButtonHover(credits);
         //history.pushState(null, null, '#mainmenu');
 
         playMusic(true);
+    },
+
+    bindButtonHover: function(button) {
+        "use strict";
+
+        button.events.onInputOver.add(this.animateButtonIn, this);
+        button.events.onInputOut.add(this.animateButtonOut, this);
+    },
+
+    animateButtonIn: function(button) {
+        "use strict";
+
+        game.add.tween(button.scale).to(
+            { x: 1.05, y: 1.05 },
+            150,
+            Phaser.Easing.Back.Out,
+            true,
+            0,
+            false
+        ).start();
+    },
+
+    animateButtonOut: function(button) {
+        "use strict";
+
+        game.add.tween(button.scale).to(
+            { x: 1, y: 1 },
+            150,
+            Phaser.Easing.Back.Out,
+            true,
+            0,
+            false
+        ).start();
     },
 
     startGame: function() {
