@@ -14,6 +14,8 @@ MouseGame.Game.prototype = {
     scientist: null,
     mouse: null,
     ui: null,
+    pauseMenu: null,
+    buttonCounter: 0,
 
     levels: [
         'test-map',
@@ -53,8 +55,10 @@ MouseGame.Game.prototype = {
     update: function() {
         "use strict";
 
-        if (game.input.keyboard.isDown(Phaser.Keyboard.ESC)) {
-            this.quitToMenu();
+        console.log(this.buttonCounter)
+        if (game.input.keyboard.isDown(Phaser.Keyboard.ESC) && this.buttonCounter > 20) {
+            this.pauseGame();
+            this.buttonCounter = 0
         }
 
         // if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.keyReset === false) {
@@ -103,13 +107,24 @@ MouseGame.Game.prototype = {
         //     game.input.keyboard.justReleased(Phaser.Keyboard.DELETE)) {
         //     this.keyReset = false;
         // }
+        this.buttonCounter++
     },
 
     quitToMenu: function () {
         "use strict";
 
         this.game.state.start('levelselector');
-    }
+    },
+    // pause the game
+    pauseGame : function () {
+        'use strict';
 
+        console.log('tyler')
+        this.pauseMenu = game.add.sprite(game.width / 2, game.height / 2)
+        playMusic(false, true)
+    },
+    unpauseGame: function () {
+        
+    }
 };
 
