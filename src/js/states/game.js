@@ -16,6 +16,7 @@ MouseGame.Game.prototype = {
     ui: null,
     pauseMenu: null,
     buttonCounter: 0,
+    gamePaused: false,
 
     levels: [
         'test-map',
@@ -55,59 +56,17 @@ MouseGame.Game.prototype = {
     update: function() {
         "use strict";
 
-        console.log(this.buttonCounter)
         if (game.input.keyboard.isDown(Phaser.Keyboard.ESC) && this.buttonCounter > 20) {
-            this.pauseGame();
-            this.buttonCounter = 0
+            if (this.gamePaused === false) {
+                this.buttonCounter = 0;
+                this.pauseGame();
+            } else {
+                this.buttonCounter = 0;
+                this.unpauseGame();
+            }
         }
 
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var button0 = MouseGame.Commands.prototype.buttons[0];
-        //     MouseGame.Commands.prototype.onTileClick(button0);
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.RIGHT) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var button1 = MouseGame.Commands.prototype.buttons[1];
-        //     MouseGame.Commands.prototype.onTileClick(button1);
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.LEFT) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var button2 = MouseGame.Commands.prototype.buttons[2];
-        //     MouseGame.Commands.prototype.onTileClick(button2);
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var button3 = MouseGame.Commands.prototype.buttons[3];
-        //     MouseGame.Commands.prototype.onTileClick(button3);
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     MouseGame.Commands.prototype.playLevel();
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.DELETE) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var lastIndex = MouseGame.Commands.prototype.orders.length;
-        //     var button = MouseGame.Commands.prototype.orders[lastIndex-1];
-        //     if (typeof button !== 'undefined') {
-        //         MouseGame.Commands.prototype.onOrderClick(button);
-        //     }
-        // }
-
-        // if (game.input.keyboard.justReleased(Phaser.Keyboard.LEFT) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.RIGHT) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.UP) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.DOWN) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.ENTER) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.DELETE)) {
-        //     this.keyReset = false;
-        // }
-        this.buttonCounter++
+        this.buttonCounter++;
     },
 
     quitToMenu: function () {
@@ -119,12 +78,17 @@ MouseGame.Game.prototype = {
     pauseGame : function () {
         'use strict';
 
-        console.log('tyler')
-        this.pauseMenu = game.add.sprite(game.width / 2, game.height / 2)
-        playMusic(false, true)
+        MouseGame.Game.prototype.gamePaused = true;
+        this.pauseMenu = game.add.text(game.width / 2, game.height / 2, 'the game is paused', { font: '30px Arial'});
+        this.pauseMenu.anchor.setTo(0.5, 0.5);
+        playMusic(false, true);
     },
+
     unpauseGame: function () {
-        
+        MouseGame.Game.prototype.gamePaused = false;
+        this.pauseMenu.destroy();
+        console.log(this.pauseMenu);
+        playMusic(false, false);
     }
 };
 

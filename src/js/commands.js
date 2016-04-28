@@ -6,6 +6,7 @@ MouseGame.Commands.prototype = {
     orders: [],
     mouseTween: null,
     isPlaying: false,
+    isPaused: false,
     goButton: null,
     buttons: [],
 
@@ -49,6 +50,11 @@ MouseGame.Commands.prototype = {
             return;
         }
 
+        if (MouseGame.Game.prototype.gamePaused === true) {
+            console.log('onTileClick pause')
+            return
+        }
+
         // if (MouseGame.Commands.prototype.orders.length >= 32) {
             //return;
         // }
@@ -83,6 +89,11 @@ MouseGame.Commands.prototype = {
 
     renderOrders: function() {
         "use strict";
+
+        if (MouseGame.Game.prototype.gamePaused === true) {
+            console.log('paused bro')
+            return
+        }
 
         for (var i = 0; i < MouseGame.Commands.prototype.orders.length; i++) {
             var order = MouseGame.Commands.prototype.orders[i];
@@ -151,6 +162,12 @@ MouseGame.Commands.prototype = {
         "use strict";
 
         if (MouseGame.Commands.prototype.orders.length === 0) {
+            return;
+        }
+
+        // if game is paused return nothing
+
+        if (MouseGame.Game.prototype.gamePaused === true) {
             return;
         }
 
@@ -422,8 +439,3 @@ MouseGame.Commands.prototype = {
 
     }
 };
-
-
-
-
-

@@ -14,9 +14,12 @@ function playMusic(isMenuMusic, shouldPause) {
         gameMusic = game.add.audio('game-music', 1, true);
     }
 
-    // this will also toggle unpause
     if (gameMusic.isPlaying && shouldPause === true) {
         return gameMusic.pause()
+    }
+
+    if (gameMusic.paused && shouldPause === false) {
+        gameMusic.resume();
     }
 
     if (isMenuMusic === true) {
