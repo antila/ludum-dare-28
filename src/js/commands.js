@@ -6,7 +6,6 @@ MouseGame.Commands.prototype = {
     orders: [],
     mouseTween: null,
     isPlaying: false,
-    isPaused: false,
     goButton: null,
     buttons: [],
 
