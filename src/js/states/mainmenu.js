@@ -1,8 +1,10 @@
 var menuMusic;
 var gameMusic;
 
-function playMusic(isMenuMusic) {
+function playMusic(isMenuMusic, shouldPause) {
     "use strict";
+
+    
 
     if (typeof menuMusic === 'undefined') {
         menuMusic = game.add.audio('menu-music', 1, true);
@@ -10,6 +12,14 @@ function playMusic(isMenuMusic) {
 
     if (typeof gameMusic === 'undefined') {
         gameMusic = game.add.audio('game-music', 1, true);
+    }
+
+    if (gameMusic.isPlaying && shouldPause === true) {
+        return gameMusic.pause();
+    }
+
+    if (gameMusic.paused && shouldPause === false) {
+        gameMusic.resume();
     }
 
     if (isMenuMusic === true) {

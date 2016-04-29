@@ -14,6 +14,10 @@ MouseGame.Game.prototype = {
     scientist: null,
     mouse: null,
     ui: null,
+    pauseMenu: null,
+    buttonCounter: 0,
+    gamePaused: false,
+    wasPlaying: false,
 
     levels: [
         'test-map',
@@ -53,63 +57,59 @@ MouseGame.Game.prototype = {
     update: function() {
         "use strict";
 
-        if (game.input.keyboard.isDown(Phaser.Keyboard.ESC)) {
-            this.quitToMenu();
+        if (game.input.keyboard.isDown(Phaser.Keyboard.ESC) && this.buttonCounter > 20) {
+            if (MouseGame.Game.prototype.gamePaused === false) {
+                this.buttonCounter = 0;
+                this.pauseGame();
+            } else {
+                this.buttonCounter = 0;
+                this.unpauseGame();
+            }
         }
 
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.UP) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var button0 = MouseGame.Commands.prototype.buttons[0];
-        //     MouseGame.Commands.prototype.onTileClick(button0);
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.RIGHT) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var button1 = MouseGame.Commands.prototype.buttons[1];
-        //     MouseGame.Commands.prototype.onTileClick(button1);
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.LEFT) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var button2 = MouseGame.Commands.prototype.buttons[2];
-        //     MouseGame.Commands.prototype.onTileClick(button2);
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.DOWN) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var button3 = MouseGame.Commands.prototype.buttons[3];
-        //     MouseGame.Commands.prototype.onTileClick(button3);
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.ENTER) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     MouseGame.Commands.prototype.playLevel();
-        // }
-
-        // if (game.input.keyboard.justPressed(Phaser.Keyboard.DELETE) && this.keyReset === false) {
-        //     this.keyReset = true;
-        //     var lastIndex = MouseGame.Commands.prototype.orders.length;
-        //     var button = MouseGame.Commands.prototype.orders[lastIndex-1];
-        //     if (typeof button !== 'undefined') {
-        //         MouseGame.Commands.prototype.onOrderClick(button);
-        //     }
-        // }
-
-        // if (game.input.keyboard.justReleased(Phaser.Keyboard.LEFT) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.RIGHT) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.UP) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.DOWN) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.ENTER) ||
-        //     game.input.keyboard.justReleased(Phaser.Keyboard.DELETE)) {
-        //     this.keyReset = false;
-        // }
+        this.buttonCounter++;
     },
 
     quitToMenu: function () {
         "use strict";
 
         this.game.state.start('levelselector');
-    }
+    },
+    // pause the game
+    pauseGame : function () {
+        'use strict';
 
+        if (MouseGame.Commands.prototype.isPlaying === true) {
+            MouseGame.Game.prototype.wasPlaying = true;
+        }
+
+        MouseGame.Game.prototype.gamePaused = true;
+        MouseGame.Commands.prototype.isPlaying = false;
+        this.pauseMenu = {};
+        this.pauseMenu.backButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-back', this.returnToMainMenu, this, 2, 1, 0);
+        this.pauseMenu.backButton.anchor.setTo(0.5, 0.5);
+        playMusic(false, true);
+    },
+
+    unpauseGame: function () {
+        'use strict';
+        MouseGame.Game.prototype.gamePaused = false;
+        this.pauseMenu.backButton.destroy();
+        playMusic(false, false);
+        if (MouseGame.Game.prototype.wasPlaying === true) {
+            MouseGame.Commands.prototype.isPlaying = true;
+            MouseGame.Game.prototype.wasPlaying = false;
+            MouseGame.Commands.prototype.executeOrder();
+        }
+    },
+
+    returnToMainMenu: function () {
+        'use strict';
+        // reset the isPlaying variable so the game doesn't think that the Mouse is still running
+        MouseGame.Commands.prototype.isPlaying = false;
+        MouseGame.Game.prototype.gamePaused = false;
+        this.pauseMenu.backButton.destroy();
+        MouseGame.LevelSelector.prototype.showMenu.call(this);
+    }
 };
 
