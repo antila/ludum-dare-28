@@ -57,7 +57,7 @@ MouseGame.Game.prototype = {
         "use strict";
 
         if (game.input.keyboard.isDown(Phaser.Keyboard.ESC) && this.buttonCounter > 20) {
-            if (this.gamePaused === false) {
+            if (MouseGame.Game.prototype.gamePaused === false) {
                 this.buttonCounter = 0;
                 this.pauseGame();
             } else {
@@ -79,16 +79,23 @@ MouseGame.Game.prototype = {
         'use strict';
 
         MouseGame.Game.prototype.gamePaused = true;
-        this.pauseMenu = game.add.text(game.width / 2, game.height / 2, 'the game is paused', { font: '30px Arial'});
-        this.pauseMenu.anchor.setTo(0.5, 0.5);
+        console.log(this.game.add.button)
+        this.pauseMenu = {}
+        this.pauseMenu.backButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-back', this.returnToMainMenu, this, 2, 1, 0)
+        this.pauseMenu.backButton.anchor.setTo(0.5, 0.5)
         playMusic(false, true);
     },
 
     unpauseGame: function () {
         MouseGame.Game.prototype.gamePaused = false;
-        this.pauseMenu.destroy();
-        console.log(this.pauseMenu);
+        this.pauseMenu.backButton.destroy();
         playMusic(false, false);
+    },
+
+    returnToMainMenu: function () {
+        MouseGame.Game.prototype.gamePaused = false;
+        this.pauseMenu.backButton.destroy()
+        MouseGame.LevelSelector.prototype.showMenu.call(this)
     }
 };
 
