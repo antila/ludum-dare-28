@@ -15,7 +15,7 @@ function playMusic(isMenuMusic, shouldPause) {
     }
 
     if (gameMusic.isPlaying && shouldPause === true) {
-        return gameMusic.pause()
+        return gameMusic.pause();
     }
 
     if (gameMusic.paused && shouldPause === false) {

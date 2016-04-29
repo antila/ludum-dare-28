@@ -51,8 +51,7 @@ MouseGame.Commands.prototype = {
         }
 
         if (MouseGame.Game.prototype.gamePaused === true) {
-            console.log('onTileClick pause')
-            return
+            return;
         }
 
         // if (MouseGame.Commands.prototype.orders.length >= 32) {
@@ -91,8 +90,7 @@ MouseGame.Commands.prototype = {
         "use strict";
 
         if (MouseGame.Game.prototype.gamePaused === true) {
-            console.log('paused bro')
-            return
+            return;
         }
 
         for (var i = 0; i < MouseGame.Commands.prototype.orders.length; i++) {
@@ -124,6 +122,10 @@ MouseGame.Commands.prototype = {
 
     stopButton: function() {
         "use strict";
+
+        if (MouseGame.Game.prototype.gamePaused) {
+            return;
+        }
 
         this.resetDoors(90, 229, 900);
         this.resetDoors(110, 230, 1100);
@@ -161,15 +163,18 @@ MouseGame.Commands.prototype = {
     playLevel: function() {
         "use strict";
 
-        if (MouseGame.Commands.prototype.orders.length === 0) {
-            return;
-        }
-
         // if game is paused return nothing
 
         if (MouseGame.Game.prototype.gamePaused === true) {
             return;
         }
+
+
+        if (MouseGame.Commands.prototype.orders.length === 0) {
+            return;
+        }
+
+
 
         if (this.isPlaying === true) {
             this.goButton.setFrames(20, 21, 22);
@@ -185,6 +190,10 @@ MouseGame.Commands.prototype = {
 
     resetLevel: function() {
         "use strict";
+
+        if (MouseGame.Game.prototype.gamePaused === true) {
+            return;
+        }
 
         if (this.isPlaying === true) {
             this.stopButton();

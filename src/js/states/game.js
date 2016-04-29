@@ -17,6 +17,7 @@ MouseGame.Game.prototype = {
     pauseMenu: null,
     buttonCounter: 0,
     gamePaused: false,
+    wasPlaying: false,
 
     levels: [
         'test-map',
@@ -78,24 +79,37 @@ MouseGame.Game.prototype = {
     pauseGame : function () {
         'use strict';
 
+        if (MouseGame.Commands.prototype.isPlaying === true) {
+            MouseGame.Game.prototype.wasPlaying = true;
+        }
+
         MouseGame.Game.prototype.gamePaused = true;
-        console.log(this.game.add.button)
-        this.pauseMenu = {}
-        this.pauseMenu.backButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-back', this.returnToMainMenu, this, 2, 1, 0)
-        this.pauseMenu.backButton.anchor.setTo(0.5, 0.5)
+        MouseGame.Commands.prototype.isPlaying = false;
+        this.pauseMenu = {};
+        this.pauseMenu.backButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-back', this.returnToMainMenu, this, 2, 1, 0);
+        this.pauseMenu.backButton.anchor.setTo(0.5, 0.5);
         playMusic(false, true);
     },
 
     unpauseGame: function () {
+        'use strict';
         MouseGame.Game.prototype.gamePaused = false;
         this.pauseMenu.backButton.destroy();
         playMusic(false, false);
+        if (MouseGame.Game.prototype.wasPlaying === true) {
+            MouseGame.Commands.prototype.isPlaying = true;
+            MouseGame.Game.prototype.wasPlaying = false;
+            MouseGame.Commands.prototype.executeOrder();
+        }
     },
 
     returnToMainMenu: function () {
+        'use strict';
+        // reset the isPlaying variable so the game doesn't think that the Mouse is still running
+        MouseGame.Commands.prototype.isPlaying = false;
         MouseGame.Game.prototype.gamePaused = false;
-        this.pauseMenu.backButton.destroy()
-        MouseGame.LevelSelector.prototype.showMenu.call(this)
+        this.pauseMenu.backButton.destroy();
+        MouseGame.LevelSelector.prototype.showMenu.call(this);
     }
 };
 
