@@ -89,7 +89,7 @@ MouseGame.Game.prototype = {
         this.pauseMenu = {};
         this.pauseMenu.muteButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY - 100, 'button-mute', this.muteAudio, this, 2, 1, 0);
         this.pauseMenu.mainMenuButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-main-menu', this.returnToMainMenu, this, 2, 1, 0);
-        this.pauseMenu.returnToGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 100, 'button-back', this.returnMainMenu, this, 2, 1, 0);
+        this.pauseMenu.returnToGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 100, 'button-back', this.unpauseGame, this, 2, 1, 0);
         this.pauseMenu.mainMenuButton.anchor.setTo(0.5, 0.5);
         this.pauseMenu.muteButton.anchor.setTo(0.5, 0.5);
         this.pauseMenu.returnToGameButton.anchor.setTo(0.5, 0.5);
@@ -115,7 +115,9 @@ MouseGame.Game.prototype = {
         // reset the isPlaying variable so the game doesn't think that the Mouse is still running
         MouseGame.Commands.prototype.isPlaying = false;
         MouseGame.Game.prototype.gamePaused = false;
-        this.pauseMenu.backButton.destroy();
+        this.pauseMenu.mainMenuButton.destroy();
+        this.pauseMenu.muteButton.destroy();
+        this.pauseMenu.returnToGameButton.destroy();
         MouseGame.LevelSelector.prototype.showMenu.call(this);
     },
 
