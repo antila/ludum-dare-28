@@ -4,6 +4,12 @@ var gameMusic;
 function playMusic(isMenuMusic, shouldPause) {
     "use strict";
 
+    if (MouseGame.Game.prototype.musicMuted === true) {
+        gameMusic.pause();
+        menuMusic.pause();
+        return;
+    }
+
     if (typeof menuMusic === 'undefined') {
         menuMusic = game.add.audio('menu-music', 1, true);
     }
@@ -14,10 +20,8 @@ function playMusic(isMenuMusic, shouldPause) {
 
     if (gameMusic.isPlaying && shouldPause === true) {
         return gameMusic.pause();
-    }
-
-    if (gameMusic.paused && shouldPause === false) {
-        gameMusic.resume();
+    } else if (gameMusic.paused && shouldPause === false) {
+        return gameMusic.resume();
     }
 
     if (isMenuMusic === true) {

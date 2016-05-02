@@ -18,6 +18,7 @@ MouseGame.Game.prototype = {
     buttonCounter: 0,
     gamePaused: false,
     wasPlaying: false,
+    musicMuted: false,
 
     levels: [
         'test-map',
@@ -86,7 +87,7 @@ MouseGame.Game.prototype = {
         MouseGame.Game.prototype.gamePaused = true;
         MouseGame.Commands.prototype.isPlaying = false;
         this.pauseMenu = {};
-        this.pauseMenu.muteButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY - 100, 'button-mute', this.returnMainMenu, this, 2, 1, 0);
+        this.pauseMenu.muteButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY - 100, 'button-mute', this.muteAudio, this, 2, 1, 0);
         this.pauseMenu.mainMenuButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-main-menu', this.returnToMainMenu, this, 2, 1, 0);
         this.pauseMenu.returnToGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 100, 'button-back', this.returnMainMenu, this, 2, 1, 0);
         this.pauseMenu.mainMenuButton.anchor.setTo(0.5, 0.5);
@@ -116,6 +117,16 @@ MouseGame.Game.prototype = {
         MouseGame.Game.prototype.gamePaused = false;
         this.pauseMenu.backButton.destroy();
         MouseGame.LevelSelector.prototype.showMenu.call(this);
+    },
+
+    muteAudio: function () {
+        'use strict';
+        
+        if (MouseGame.Game.prototype.musicMuted === false) {
+            MouseGame.Game.prototype.musicMuted = true;
+        } else if (MouseGame.Game.prototype.musicMuted === true) {
+            MouseGame.Game.prototype.musicMuted = false;
+        }
     }
 };
 
