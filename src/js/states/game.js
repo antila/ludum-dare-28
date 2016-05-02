@@ -86,15 +86,21 @@ MouseGame.Game.prototype = {
         MouseGame.Game.prototype.gamePaused = true;
         MouseGame.Commands.prototype.isPlaying = false;
         this.pauseMenu = {};
-        this.pauseMenu.backButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-back', this.returnToMainMenu, this, 2, 1, 0);
-        this.pauseMenu.backButton.anchor.setTo(0.5, 0.5);
+        this.pauseMenu.muteButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY - 100, 'button-mute', this.returnMainMenu, this, 2, 1, 0);
+        this.pauseMenu.mainMenuButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-main-menu', this.returnToMainMenu, this, 2, 1, 0);
+        this.pauseMenu.returnToGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 100, 'button-back', this.returnMainMenu, this, 2, 1, 0);
+        this.pauseMenu.mainMenuButton.anchor.setTo(0.5, 0.5);
+        this.pauseMenu.muteButton.anchor.setTo(0.5, 0.5);
+        this.pauseMenu.returnToGameButton.anchor.setTo(0.5, 0.5);
         playMusic(false, true);
     },
 
     unpauseGame: function () {
         'use strict';
         MouseGame.Game.prototype.gamePaused = false;
-        this.pauseMenu.backButton.destroy();
+        this.pauseMenu.mainMenuButton.destroy();
+        this.pauseMenu.muteButton.destroy();
+        this.pauseMenu.returnToGameButton.destroy();
         playMusic(false, false);
         if (MouseGame.Game.prototype.wasPlaying === true) {
             MouseGame.Commands.prototype.isPlaying = true;

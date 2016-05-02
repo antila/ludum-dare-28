@@ -49,7 +49,7 @@ MouseGame.Preloader.prototype = {
         game.load.image('button-credits','assets/buttons/credits.png');
         game.load.image('button-play','assets/buttons/play.png');
         game.load.image('button-main-menu','assets/buttons/main_menu.png');
-        game.load.image('button-play','assets/buttons/mute_audio.png');
+        game.load.image('button-mute','assets/buttons/mute_audio.png');
         game.load.image('credits-background','assets/backgrounds/credits-background.jpg');
         game.load.image('intro-1','assets/backgrounds/intro-1.jpg');
         game.load.image('intro-10','assets/backgrounds/intro-10.jpg');
