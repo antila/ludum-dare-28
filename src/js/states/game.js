@@ -53,22 +53,15 @@ MouseGame.Game.prototype = {
         playMusic(false);
 
         MouseGame.Commands.isPlaying = false;
+
+        var pauseKey = game.input.keyboard.addKey(Phaser.Keyboard.ESC);
+        pauseKey.onDown.add(MouseGame.Game.prototype.togglePause, this);
+
     },
 
     update: function() {
         "use strict";
 
-        if (game.input.keyboard.isDown(Phaser.Keyboard.ESC) && this.buttonCounter > 20) {
-            if (MouseGame.Game.prototype.gamePaused === false) {
-                this.buttonCounter = 0;
-                this.pauseGame();
-            } else {
-                this.buttonCounter = 0;
-                this.unpauseGame();
-            }
-        }
-
-        this.buttonCounter++;
     },
 
     quitToMenu: function () {
@@ -76,6 +69,17 @@ MouseGame.Game.prototype = {
 
         this.game.state.start('levelselector');
     },
+
+    togglePause : function () {
+        "use strict";
+
+        if (MouseGame.Game.prototype.gamePaused) {
+            this.unpauseGame();
+        } else {
+            this.pauseGame();
+        }
+    },
+
     // pause the game
     pauseGame : function () {
         'use strict';
@@ -87,12 +91,19 @@ MouseGame.Game.prototype = {
         MouseGame.Game.prototype.gamePaused = true;
         MouseGame.Commands.prototype.isPlaying = false;
         this.pauseMenu = {};
-        this.pauseMenu.muteButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY - 100, 'button-mute', this.muteAudio, this, 2, 1, 0);
+        if (MouseGame.Game.prototype.musicMuted === true) {
+            this.pauseMenu.muteButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY - 100, 'button-unmute', this.muteAudio, this, 2, 1, 0);
+        } else {
+            this.pauseMenu.muteButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY - 100, 'button-mute', this.muteAudio, this, 2, 1, 0);
+        }
         this.pauseMenu.mainMenuButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY, 'button-main-menu', this.returnToMainMenu, this, 2, 1, 0);
         this.pauseMenu.returnToGameButton = this.game.add.button(this.game.world.centerX, this.game.world.centerY + 100, 'button-back', this.unpauseGame, this, 2, 1, 0);
         this.pauseMenu.mainMenuButton.anchor.setTo(0.5, 0.5);
         this.pauseMenu.muteButton.anchor.setTo(0.5, 0.5);
         this.pauseMenu.returnToGameButton.anchor.setTo(0.5, 0.5);
+        MouseGame.MainMenu.prototype.bindButtonHover(this.pauseMenu.muteButton);
+        MouseGame.MainMenu.prototype.bindButtonHover(this.pauseMenu.mainMenuButton);
+        MouseGame.MainMenu.prototype.bindButtonHover(this.pauseMenu.returnToGameButton);
         playMusic(false, true);
     },
 
@@ -126,8 +137,10 @@ MouseGame.Game.prototype = {
         
         if (MouseGame.Game.prototype.musicMuted === false) {
             MouseGame.Game.prototype.musicMuted = true;
+            this.pauseMenu.muteButton.loadTexture('button-unmute');
         } else if (MouseGame.Game.prototype.musicMuted === true) {
             MouseGame.Game.prototype.musicMuted = false;
+            this.pauseMenu.muteButton.loadTexture('button-mute');
         }
     }
 };
