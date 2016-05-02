@@ -4,8 +4,6 @@ var gameMusic;
 function playMusic(isMenuMusic, shouldPause) {
     "use strict";
 
-    
-
     if (typeof menuMusic === 'undefined') {
         menuMusic = game.add.audio('menu-music', 1, true);
     }
@@ -27,27 +25,16 @@ function playMusic(isMenuMusic, shouldPause) {
             return;
         }
 
-        // game.add.tween(gameMusic)
-        //     .to({ volume: 0 }, 2500, Phaser.Easing.In, true, 0, false)
-        //     .onCompleteCallback(function() {
         gameMusic.pause();
         menuMusic.play('',0,1,true);
 
-            //     game.add.tween(menuMusic).to({ volume: 1 }, 2500, Phaser.Easing.In, true, 0, false).start();
-            // }).start();
     } else {
         if (gameMusic.isPlaying === true) {
             return;
         }
 
-        // game.add.tween(menuMusic)
-        //     .to({ volume: 0 }, 2500, Phaser.Easing.In, true, 0, false)
-        //     .onCompleteCallback(function() {
         menuMusic.pause();
         gameMusic.play('',0,1,true);
-
-            //     game.add.tween(gameMusic).to({ volume: 1 }, 2500, Phaser.Easing.In, true, 0, false).start();
-            // }).start();
     }
 }
 
